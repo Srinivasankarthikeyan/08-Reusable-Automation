@@ -1,0 +1,31 @@
+name: 50 - Workflow Inputs
+# This workflow demonstrates defining and using inputs in a reusable workflow.
+# Exam Tip: Inputs can have types: string, boolean, number, or choice.
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: string
+      run-tests:
+        description: 'Whether to run tests'
+        required: false
+        default: true
+        type: boolean
+      version:
+        type: number
+        required: false
+
+jobs:
+  logic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Environment check
+        run: echo "Deploying to ${{ inputs.environment }}"
+      
+      - name: Conditional Test
+        if: ${{ inputs.run-tests }}
+        run: echo "Running tests..."

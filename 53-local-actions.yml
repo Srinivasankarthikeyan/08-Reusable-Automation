@@ -1,0 +1,18 @@
+name: 53 - Local Actions
+# This workflow demonstrates how to call an action located in the same repository.
+# Exam Tip: Local actions are referenced by their path relative to the repo root.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  local-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run Local Action
+        # Assuming action.yml is in .github/actions/my-custom-action
+        uses: ./.github/actions/my-custom-action
+        with:
+          param1: 'value'

@@ -1,0 +1,12 @@
+name: 48 - Reusable Workflows (Caller)
+# This workflow demonstrates how to call a reusable workflow.
+# Exam Tip: Reusable workflows reduce duplication and ensure consistency across repos.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-workflow:
+    # Use 'uses' at the job level to call a reusable workflow
+    # Syntax: {owner}/{repo}/.github/workflows/{filename}@{ref}
+    uses: ./.github/workflows/01-basic-workflow.yml

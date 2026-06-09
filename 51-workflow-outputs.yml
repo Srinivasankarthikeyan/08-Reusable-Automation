@@ -1,0 +1,19 @@
+name: 51 - Workflow Outputs
+# This workflow demonstrates returning outputs from a reusable workflow.
+# Exam Tip: Use 'outputs' in 'workflow_call' to pass data back to the caller.
+
+on:
+  workflow_call:
+    outputs:
+      status:
+        description: "The status of the operation"
+        value: ${{ jobs.process.outputs.outcome }}
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    outputs:
+      outcome: ${{ steps.set-output.outputs.result }}
+    steps:
+      - id: set-output
+        run: echo "result=success" >> $GITHUB_OUTPUT

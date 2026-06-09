@@ -1,0 +1,20 @@
+name: 49 - Workflow Call (Template)
+# This is a reusable workflow template.
+# Exam Tip: Use the 'workflow_call' trigger to make a workflow reusable.
+
+on:
+  workflow_call:
+    inputs:
+      config-name:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  reusable-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running with config ${{ inputs.config-name }}"
+      - run: echo "Token is available (masked)"

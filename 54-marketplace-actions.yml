@@ -1,0 +1,26 @@
+name: 54 - Marketplace Actions
+# This workflow demonstrates using actions from the GitHub Marketplace.
+# Exam Tip: Always pin actions to a full SHA for maximum security.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  marketplace-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # Marketplace action
+      
+      # Example: Using a community action to slack a notification
+      # - name: Slack Notification
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4 # Marketplace action
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node
