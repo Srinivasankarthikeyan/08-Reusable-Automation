@@ -1,0 +1,36 @@
+name: 52 - Test Reusable Workflows
+# Runs all reusable workflow examples (49, 50, 51) from one manual trigger.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-template:
+    name: Test 49 - Template
+    uses: ./.github/workflows/49-workflow-call-template.yml
+    with:
+      config-name: production
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+  test-inputs:
+    name: Test 50 - Inputs
+    needs: test-template
+    uses: ./.github/workflows/50-workflow-inputs.yml
+    with:
+      environment: staging
+      run-tests: true
+      version: 1
+
+  test-outputs:
+    name: Test 51 - Outputs
+    needs: test-inputs
+    uses: ./.github/workflows/51-workflow-outputs.yml
+
+  verify-output:
+    name: Verify Output Value
+    needs: test-outputs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print returned output from workflow 51
+        run: echo "Returned status is ${{ needs.test-outputs.outputs.status }}"
