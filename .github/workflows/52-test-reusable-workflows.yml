@@ -9,7 +9,7 @@ jobs:
     name: Test 49 - Template
     uses: ./.github/workflows/49-workflow-call-template.yml
     with:
-      config-name: production
+      config-name: production1 
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
